@@ -1,7 +1,7 @@
 ---
 #this is a test playbook
 
-- hosts: all
+- hosts: webservers
   tasks:
     - command: echo {{ item }}
       with_items: [ 0, 2, 4, 6, 8, 10 ]
