@@ -1,0 +1,4 @@
+---
+# handlers for nginx
+- name: restart nginx
+  command: /opt/apps/nginx/sbin/nginx -c /opt/apps/nginx/conf/nginx.conf -s reload

@@ -1,0 +1,28 @@
+---
+# This role installs nginx and configures it.
+- name: Create the repository for mtpc
+  copy: src=mtpc.repo dest=/etc/yum.repos.d/mtpc.repo
+
+- name: yum clean all
+  command: yum clean all
+
+- name: yum makecache
+  command: yum makecache
+
+- name: Download and install nginx-mpassport-1.2.4-2.x86_64
+  yum: name={{ item }} state=present
+  with_items:
+  - nginx-mpassport-1.2.4-2.x86_64
+
+- name: Configure the nginx conf directory with hosts
+  synchronize: src=/opt/apps/nginx/conf/ dest=/opt/apps/nginx/conf/
+
+- name: cp the nging server-status conf file with hosts
+  template: src=server-status.conf.j2 dest=/opt/apps/nginx/conf/server-status.conf
+
+- name: cp the nging conf file with hosts
+  template: src=nginx.conf.j2 dest=/opt/apps/nginx/conf/nginx.conf
+  notify: restart nginx
+
+- name: start nginx
+  command: /opt/apps/nginx/sbin/nginx -c /opt/apps/nginx/conf/nginx.conf

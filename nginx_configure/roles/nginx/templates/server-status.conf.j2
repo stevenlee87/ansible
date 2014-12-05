@@ -1,0 +1,26 @@
+server {
+        listen  8080;
+        server_name {{ ansible_eth0["ipv4"]["address"] }};
+        location /server-status {
+            stub_status on;
+            access_log   off;
+            allow  10.10.0.0/16;
+            allow  10.1.0.0/16;
+            allow  10.11.0.0/16;
+            allow  192.168.0.0/16;
+            allow  10.13.0.0/16;
+            deny all;
+        }
+
+        location /nstatus {
+            check_status;
+            access_log off;
+            allow  10.10.0.0/16;
+            allow  10.1.0.0/16;
+            allow  10.11.0.0/16;
+            allow  192.168.0.0/16;
+            allow  10.13.0.0/16;
+            deny all;
+        }
+
+}

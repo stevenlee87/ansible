@@ -1,0 +1,6 @@
+# Configure and deploy the nginx web servers. Note that we include two roles here, 
+- hosts: nginxserver
+  user: root
+
+  roles:
+  - nginx

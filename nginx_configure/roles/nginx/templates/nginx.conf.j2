@@ -1,0 +1,77 @@
+#user  www www;
+worker_processes  8;
+pid        logs/nginx.pid;
+error_log  logs/error.log;
+worker_rlimit_nofile 10240;
+
+events {
+    use epoll;
+    worker_connections  10240;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+	log_format  main '"$time_local","$remote_addr","$http_x_forwarded_for","$http_host","$request","$http_referer","$http_user_agent","$http_x_sohupassport_userid","$status","$body_bytes_sent","$upstream_addr","$upstream_status","$http_accept","$http_q_ua","$request_time","$upstream_response_time","go-nginx-{{ ansible_hostname }}"';
+
+# log_format  hz_main  '"[$time_local]","$remote_addr","$http_x_forwarded_for","$http_x_sohupassport_userid","$request","$request_length","$request_time","$body_bytes_sent","$status","$http_referer","$http_user_agent","$uid","$fr","$upstream_addr","$upstream_status","$upstream_response_time","m-nginx-88"';
+
+#log_format  main '"$time_local","$remote_addr","$http_x_forwarded_for","$http_host","$request","$http_referer","$http_user_agent","$upstream_http_x_s_m","$http_x_sohupassport_userid","$status","$request_time","$body_bytes_sent","$upstream_addr","$upstream_status","$upstream_response_time","$http_accept","$http_q_ua","m-nginx"';
+
+    sendfile        on;
+    tcp_nopush     on;
+    tcp_nodelay on;
+    keepalive_timeout  0;
+
+    gzip  on;
+    gzip_min_length  1000;
+    gzip_buffers     4 16k;
+    gzip_types       text/* text/css text/vnd.wap.wml application/javascript application/x-javascript application/xml application/xhtml application/xhtml+xml application/wml application/action;
+    gzip_comp_level  9;
+    gzip_proxied     any;
+    gzip_http_version 1.1;
+    gzip_disable "MSIE [1-6].(?!.*SV1)";
+    gzip_vary on;
+
+    output_buffers   4 32k;
+    postpone_output  1460;
+
+    server_names_hash_bucket_size 128;
+    client_header_buffer_size 32k;
+    client_max_body_size 8m;
+    large_client_header_buffers 4 256k;
+    client_header_timeout  1m;
+    client_body_timeout    1m;
+    send_timeout           1m;
+
+    proxy_intercept_errors on;
+
+#    secret    /opt/apps/wcms2_0/conf/secret.key;
+    pp_wap_pubkey /opt/apps/nginx/conf/ppsmu_20130603.pub;
+    pp_rootdomain                  sohu.com;
+    pp_secret                      dfasdre%(8%$43Gl;
+    pp_contact                     dongli200899@sohu-inc.com;
+    pp_backend_appid 1080;
+
+
+include	      extra/upstream_mcms_go_A.conf;
+#include       server-status.conf;
+
+#include       extra/mops.go.sohuno.com.conf;
+#include       extra/pypi.go.sohuno.com.conf;
+#include	      extra/c.mcms.go.sohuno.com.conf;
+include	      extra/mcms.go.sohuno.com.conf;
+#include	      extra/cas.go.sohuno.com.conf;
+#include	      extra/movie.sohuno.com.conf;
+#include	      extra/ota.go.sohuno.com.conf;
+#include	      extra/wiki.go.sohuno.com.conf;
+#include	      extra/go.sohuno.com.conf;
+include	      extra/api.store.sohu.com.conf; 
+
+}
+
+
+
+
+
