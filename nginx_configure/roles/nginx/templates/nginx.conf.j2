@@ -44,27 +44,6 @@ http {
 
     proxy_intercept_errors on;
 
-#    secret    /opt/apps/wcms2_0/conf/secret.key;
-    pp_wap_pubkey /opt/apps/nginx/conf/ppsmu_20130603.pub;
-    pp_rootdomain                  sohu.com;
-    pp_secret                      dfasdre%(8%$43Gl;
-    pp_contact                     dongli200899@sohu-inc.com;
-    pp_backend_appid 1080;
-
-
-include	      extra/upstream_mcms_go_A.conf;
-#include       server-status.conf;
-
-#include       extra/mops.go.sohuno.com.conf;
-#include       extra/pypi.go.sohuno.com.conf;
-#include	      extra/c.mcms.go.sohuno.com.conf;
-include	      extra/mcms.go.sohuno.com.conf;
-#include	      extra/cas.go.sohuno.com.conf;
-#include	      extra/movie.sohuno.com.conf;
-#include	      extra/ota.go.sohuno.com.conf;
-#include	      extra/wiki.go.sohuno.com.conf;
-#include	      extra/go.sohuno.com.conf;
-include	      extra/api.store.sohu.com.conf; 
 
 }
 
