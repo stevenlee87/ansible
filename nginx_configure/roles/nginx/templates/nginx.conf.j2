@@ -13,11 +13,8 @@ http {
     include       mime.types;
     default_type  application/octet-stream;
 
-	log_format  main '"$time_local","$remote_addr","$http_x_forwarded_for","$http_host","$request","$http_referer","$http_user_agent","$http_x_sohupassport_userid","$status","$body_bytes_sent","$upstream_addr","$upstream_status","$http_accept","$http_q_ua","$request_time","$upstream_response_time","go-nginx-{{ ansible_hostname }}"';
+	log_format  main '"$time_local","$remote_addr","$http_x_forwarded_for","$http_host","$request","$http_referer","$http_user_agent","$status","$body_bytes_sent","$upstream_addr","$upstream_status","$http_accept","$http_q_ua","$request_time","$upstream_response_time","go-nginx-{{ ansible_hostname }}"';
 
-# log_format  hz_main  '"[$time_local]","$remote_addr","$http_x_forwarded_for","$http_x_sohupassport_userid","$request","$request_length","$request_time","$body_bytes_sent","$status","$http_referer","$http_user_agent","$uid","$fr","$upstream_addr","$upstream_status","$upstream_response_time","m-nginx-88"';
-
-#log_format  main '"$time_local","$remote_addr","$http_x_forwarded_for","$http_host","$request","$http_referer","$http_user_agent","$upstream_http_x_s_m","$http_x_sohupassport_userid","$status","$request_time","$body_bytes_sent","$upstream_addr","$upstream_status","$upstream_response_time","$http_accept","$http_q_ua","m-nginx"';
 
     sendfile        on;
     tcp_nopush     on;
